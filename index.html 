@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sonskyn Melkery – Die Verskil is Kwaliteit</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Lora:ital,wght@0,400;0,500;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F5EDD6;
+    --warm-white: #FDF8EE;
+    --gold: #C8933A;
+    --deep-green: #2A4028;
+    --mid-green: #4A6741;
+    --light-green: #7A9E6E;
+    --brown: #6B4423;
+    --dark: #1A1A14;
+    --text: #2E2A1E;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--warm-white);
+    color: var(--text);
+    font-family: 'Lora', serif;
+    overflow-x: hidden;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    background: var(--deep-green);
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 110%, rgba(200,147,58,0.18) 0%, transparent 70%),
+      radial-gradient(ellipse 60% 40% at 20% 20%, rgba(122,158,110,0.12) 0%, transparent 60%);
+  }
+
+  /* Grain texture */
+  .hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    opacity: 0.6;
+    pointer-events: none;
+  }
+
+  nav {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem 4rem;
+    border-bottom: 1px solid rgba(200,147,58,0.25);
+  }
+
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    color: var(--gold);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: rgba(245,237,214,0.75);
+    text-decoration: none;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    transition: color 0.3s;
+  }
+
+  .nav-links a:hover { color: var(--gold); }
+
+  .hero-content {
+    position: relative;
+    z-index: 5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 4rem 2rem;
+    gap: 1.5rem;
+  }
+
+  .sun-emblem {
+    width: 90px;
+    height: 90px;
+    margin-bottom: 0.5rem;
+    animation: slowSpin 30s linear infinite;
+  }
+
+  @keyframes slowSpin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  .hero-eyebrow {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.2s forwards;
+  }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3.5rem, 8vw, 7rem);
+    font-weight: 900;
+    color: var(--cream);
+    line-height: 0.95;
+    opacity: 0;
+    animation: fadeUp 0.9s ease 0.4s forwards;
+  }
+
+  .hero-title em {
+    display: block;
+    color: var(--gold);
+    font-style: italic;
+    font-size: 0.65em;
+  }
+
+  .hero-tagline {
+    font-size: 1rem;
+    font-style: italic;
+    color: rgba(245,237,214,0.65);
+    letter-spacing: 0.05em;
+    opacity: 0;
+    animation: fadeUp 0.9s ease 0.6s forwards;
+  }
+
+  .hero-cta {
+    margin-top: 1rem;
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    opacity: 0;
+    animation: fadeUp 0.9s ease 0.8s forwards;
+  }
+
+  .btn-primary {
+    background: var(--gold);
+    color: var(--dark);
+    padding: 0.9rem 2.2rem;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+  }
+
+  .btn-primary:hover { background: #e0a840; transform: translateY(-2px); }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--cream);
+    padding: 0.9rem 2.2rem;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 1px solid rgba(245,237,214,0.4);
+    cursor: pointer;
+    transition: border-color 0.3s, color 0.3s;
+  }
+
+  .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+
+  .hero-bottom {
+    position: relative;
+    z-index: 5;
+    padding: 2rem 4rem;
+    display: flex;
+    justify-content: center;
+    gap: 4rem;
+    border-top: 1px solid rgba(200,147,58,0.2);
+    flex-wrap: wrap;
+  }
+
+  .hero-stat {
+    text-align: center;
+    opacity: 0;
+    animation: fadeUp 0.9s ease 1s forwards;
+  }
+
+  .hero-stat strong {
+    display: block;
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    color: var(--gold);
+  }
+
+  .hero-stat span {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(245,237,214,0.5);
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── ABOUT ── */
+  .about {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 80vh;
+  }
+
+  .about-image {
+    background: var(--mid-green);
+    position: relative;
+    overflow: hidden;
+    min-height: 500px;
+  }
+
+  .about-image-inner {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(135deg, var(--deep-green) 0%, var(--mid-green) 50%, var(--light-green) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .pasture-illustration {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    inset: 0;
+  }
+
+  .about-text {
+    background: var(--cream);
+    padding: 6rem 5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1.5rem;
+  }
+
+  .section-label {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 700;
+    color: var(--deep-green);
+    line-height: 1.15;
+  }
+
+  .section-body {
+    font-size: 1.05rem;
+    line-height: 1.85;
+    color: #4A4535;
+  }
+
+  .divider {
+    width: 60px;
+    height: 2px;
+    background: var(--gold);
+  }
+
+  /* ── PRODUCTS ── */
+  .products {
+    background: var(--warm-white);
+    padding: 8rem 4rem;
+    text-align: center;
+  }
+
+  .products-header {
+    max-width: 560px;
+    margin: 0 auto 5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .product-card {
+    background: var(--cream);
+    padding: 3rem 2.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s;
+  }
+
+  .product-card::before {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--gold);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+  }
+
+  .product-card:hover { transform: translateY(-4px); }
+  .product-card:hover::before { transform: scaleX(1); }
+
+  .product-icon {
+    font-size: 2.5rem;
+    line-height: 1;
+  }
+
+  .product-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    color: var(--deep-green);
+  }
+
+  .product-desc {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: #5A5040;
+    flex: 1;
+  }
+
+  .product-price {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--gold);
+    letter-spacing: 0.05em;
+    background: rgba(200,147,58,0.12);
+    padding: 0.4rem 1rem;
+    border: 1px solid rgba(200,147,58,0.3);
+  }
+
+  /* ── WHY ── */
+  .why {
+    background: var(--deep-green);
+    padding: 8rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .why::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    border: 1px solid rgba(200,147,58,0.1);
+  }
+
+  .why::after {
+    content: '';
+    position: absolute;
+    top: -30%;
+    right: -10%;
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    border: 1px solid rgba(200,147,58,0.08);
+  }
+
+  .why-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 6rem;
+    align-items: start;
+  }
+
+  .why-left .section-title { color: var(--cream); }
+
+  .why-points {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
+  }
+
+  .why-point {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .why-point-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    color: rgba(200,147,58,0.3);
+    font-weight: 900;
+    line-height: 1;
+  }
+
+  .why-point-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    color: var(--cream);
+  }
+
+  .why-point-body {
+    font-size: 0.9rem;
+    line-height: 1.75;
+    color: rgba(245,237,214,0.6);
+  }
+
+  /* ── QUOTE ── */
+  .quote-section {
+    background: var(--gold);
+    padding: 6rem 4rem;
+    text-align: center;
+    position: relative;
+  }
+
+  .quote-mark {
+    font-family: 'Playfair Display', serif;
+    font-size: 8rem;
+    color: rgba(26,26,20,0.1);
+    line-height: 0;
+    position: absolute;
+    top: 4rem;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .quote-text {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
+    font-weight: 700;
+    font-style: italic;
+    color: var(--dark);
+    max-width: 700px;
+    margin: 0 auto 1.5rem;
+    position: relative;
+    z-index: 1;
+    line-height: 1.4;
+  }
+
+  .quote-attr {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(26,26,20,0.6);
+  }
+
+  /* ── CONTACT ── */
+  .contact {
+    background: var(--cream);
+    padding: 8rem 4rem;
+  }
+
+  .contact-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: start;
+  }
+
+  .contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+  }
+
+  .contact-item {
+    display: flex;
+    gap: 1.2rem;
+    align-items: flex-start;
+  }
+
+  .contact-item-icon {
+    width: 42px;
+    height: 42px;
+    background: var(--deep-green);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 1.1rem;
+  }
+
+  .contact-item-text strong {
+    display: block;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.3rem;
+  }
+
+  .contact-item-text p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--text);
+  }
+
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .form-group label {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--mid-green);
+  }
+
+  .form-group input,
+  .form-group textarea {
+    background: var(--warm-white);
+    border: 1px solid rgba(42,64,40,0.2);
+    padding: 0.85rem 1rem;
+    font-family: 'Lora', serif;
+    font-size: 0.95rem;
+    color: var(--text);
+    outline: none;
+    transition: border-color 0.3s;
+    resize: none;
+  }
+
+  .form-group input:focus,
+  .form-group textarea:focus {
+    border-color: var(--gold);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--dark);
+    padding: 3rem 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .footer-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    color: var(--gold);
+  }
+
+  .footer-tagline {
+    font-style: italic;
+    font-size: 0.85rem;
+    color: rgba(245,237,214,0.4);
+  }
+
+  .footer-copy {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    color: rgba(245,237,214,0.3);
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 1.5rem 2rem; }
+    .nav-links { display: none; }
+    .hero-bottom { gap: 2rem; padding: 1.5rem 2rem; }
+    .about { grid-template-columns: 1fr; }
+    .about-image { min-height: 300px; }
+    .about-text { padding: 4rem 2rem; }
+    .products { padding: 5rem 2rem; }
+    .why { padding: 5rem 2rem; }
+    .why-inner { grid-template-columns: 1fr; gap: 3rem; }
+    .why-points { grid-template-columns: 1fr; }
+    .contact { padding: 5rem 2rem; }
+    .contact-inner { grid-template-columns: 1fr; gap: 3rem; }
+    footer { padding: 2rem; flex-direction: column; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ── HERO ── -->
+<header class="hero">
+  <nav>
+    <div class="nav-logo">Sonskyn Melkery</div>
+    <ul class="nav-links">
+      <li><a href="#about">Ons Plaas</a></li>
+      <li><a href="#products">Produkte</a></li>
+      <li><a href="#why">Kwaliteit</a></li>
+      <li><a href="#contact">Kontak</a></li>
+    </ul>
+  </nav>
+
+  <div class="hero-content">
+    <!-- Sun emblem SVG -->
+    <svg class="sun-emblem" viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="45" cy="45" r="22" stroke="#C8933A" stroke-width="1.5"/>
+      <circle cx="45" cy="45" r="28" stroke="#C8933A" stroke-width="0.5" stroke-dasharray="3 4"/>
+      <circle cx="45" cy="45" r="36" stroke="#C8933A" stroke-width="0.5" opacity="0.4"/>
+      <!-- rays -->
+      <line x1="45" y1="5" x2="45" y2="14" stroke="#C8933A" stroke-width="1.5"/>
+      <line x1="45" y1="76" x2="45" y2="85" stroke="#C8933A" stroke-width="1.5"/>
+      <line x1="5" y1="45" x2="14" y2="45" stroke="#C8933A" stroke-width="1.5"/>
+      <line x1="76" y1="45" x2="85" y2="45" stroke="#C8933A" stroke-width="1.5"/>
+      <line x1="13.5" y1="13.5" x2="20" y2="20" stroke="#C8933A" stroke-width="1.5"/>
+      <line x1="70" y1="70" x2="76.5" y2="76.5" stroke="#C8933A" stroke-width="1.5"/>
+      <line x1="76.5" y1="13.5" x2="70" y2="20" stroke="#C8933A" stroke-width="1.5"/>
+      <line x1="20" y1="70" x2="13.5" y2="76.5" stroke="#C8933A" stroke-width="1.5"/>
+      <!-- inner cow silhouette -->
+      <text x="45" y="51" text-anchor="middle" font-size="18" fill="#C8933A">🐄</text>
+    </svg>
+
+    <p class="hero-eyebrow">Vars Plaasprodukte · Sedert die Begin</p>
+    <h1 class="hero-title">
+      Sonskyn
+      <em>Melkery</em>
+    </h1>
+    <p class="hero-tagline">"Die Verskil is Kwaliteit" — The Difference is Quality</p>
+    <div class="hero-cta">
+      <a href="#products" class="btn-primary">Sien Ons Produkte</a>
+      <a href="#contact" class="btn-outline">Kontak Ons</a>
+    </div>
+  </div>
+
+  <div class="hero-bottom">
+    <div class="hero-stat">
+      <strong>100%</strong>
+      <span>Vars Plaasmelk</span>
+    </div>
+    <div class="hero-stat">
+      <strong>R26</strong>
+      <span>per 2 Liter Melk</span>
+    </div>
+    <div class="hero-stat">
+      <strong>R40</strong>
+      <span>per 500ml Room</span>
+    </div>
+    <div class="hero-stat">
+      <strong>Daagliks</strong>
+      <span>Vars Beskikbaar</span>
+    </div>
+  </div>
+</header>
+
+<!-- ── ABOUT ── -->
+<section class="about" id="about">
+  <div class="about-image">
+    <div class="about-image-inner">
+      <!-- SVG pastoral scene -->
+      <svg class="pasture-illustration" viewBox="0 0 600 700" xmlns="http://www.w3.org/2000/svg">
+        <!-- Sky -->
+        <rect width="600" height="700" fill="#2A4028"/>
+        <!-- Sun -->
+        <circle cx="300" cy="180" r="80" fill="rgba(200,147,58,0.15)"/>
+        <circle cx="300" cy="180" r="55" fill="rgba(200,147,58,0.2)"/>
+        <circle cx="300" cy="180" r="35" fill="rgba(200,147,58,0.35)"/>
+        <!-- Ground -->
+        <ellipse cx="300" cy="580" rx="320" ry="180" fill="#4A6741" opacity="0.5"/>
+        <ellipse cx="300" cy="620" rx="360" ry="160" fill="#3A5430" opacity="0.7"/>
+        <!-- Hills -->
+        <ellipse cx="100" cy="500" rx="200" ry="120" fill="#3A5430" opacity="0.6"/>
+        <ellipse cx="500" cy="480" rx="180" ry="100" fill="#3A5430" opacity="0.6"/>
+        <!-- Tree left -->
+        <rect x="80" y="340" width="12" height="80" fill="#6B4423" opacity="0.8"/>
+        <ellipse cx="86" cy="320" rx="35" ry="40" fill="#4A6741" opacity="0.9"/>
+        <ellipse cx="86" cy="310" rx="25" ry="30" fill="#5A7A50"/>
+        <!-- Tree right -->
+        <rect x="490" y="360" width="12" height="70" fill="#6B4423" opacity="0.8"/>
+        <ellipse cx="496" cy="340" rx="30" ry="35" fill="#4A6741" opacity="0.9"/>
+        <ellipse cx="496" cy="330" rx="22" ry="26" fill="#5A7A50"/>
+        <!-- Fence -->
+        <line x1="50" y1="480" x2="550" y2="480" stroke="#8B6A3A" stroke-width="3" opacity="0.6"/>
+        <line x1="50" y1="500" x2="550" y2="500" stroke="#8B6A3A" stroke-width="2" opacity="0.5"/>
+        <line x1="100" y1="465" x2="100" y2="515" stroke="#8B6A3A" stroke-width="4" opacity="0.7"/>
+        <line x1="175" y1="465" x2="175" y2="515" stroke="#8B6A3A" stroke-width="4" opacity="0.7"/>
+        <line x1="250" y1="465" x2="250" y2="515" stroke="#8B6A3A" stroke-width="4" opacity="0.7"/>
+        <line x1="325" y1="465" x2="325" y2="515" stroke="#8B6A3A" stroke-width="4" opacity="0.7"/>
+        <line x1="400" y1="465" x2="400" y2="515" stroke="#8B6A3A" stroke-width="4" opacity="0.7"/>
+        <line x1="475" y1="465" x2="475" y2="515" stroke="#8B6A3A" stroke-width="4" opacity="0.7"/>
+        <!-- Cows -->
+        <g transform="translate(180,410) scale(0.9)">
+          <ellipse cx="40" cy="30" rx="38" ry="22" fill="#F5EDD6"/>
+          <ellipse cx="68" cy="22" rx="15" ry="12" fill="#F5EDD6"/>
+          <rect x="14" y="48" width="9" height="25" rx="3" fill="#E8D8B0"/>
+          <rect x="28" y="50" width="9" height="25" rx="3" fill="#E8D8B0"/>
+          <rect x="48" y="50" width="9" height="25" rx="3" fill="#E8D8B0"/>
+          <rect x="62" y="48" width="9" height="25" rx="3" fill="#E8D8B0"/>
+          <circle cx="78" cy="18" r="4" fill="#2A1810"/>
+          <ellipse cx="62" cy="10" rx="5" ry="8" fill="#F5EDD6"/>
+          <ellipse cx="74" cy="10" rx="5" ry="8" fill="#F5EDD6"/>
+          <ellipse cx="30" cy="48" rx="14" ry="8" fill="rgba(255,180,180,0.4)"/>
+          <!-- patches -->
+          <ellipse cx="25" cy="25" rx="12" ry="8" fill="#8B7355" opacity="0.4"/>
+          <ellipse cx="55" cy="35" rx="10" ry="7" fill="#8B7355" opacity="0.3"/>
+        </g>
+        <g transform="translate(330,420) scale(0.75)">
+          <ellipse cx="40" cy="30" rx="38" ry="22" fill="#C8B08A"/>
+          <ellipse cx="68" cy="22" rx="15" ry="12" fill="#C8B08A"/>
+          <rect x="14" y="48" width="9" height="22" rx="3" fill="#B09870"/>
+          <rect x="28" y="50" width="9" height="22" rx="3" fill="#B09870"/>
+          <rect x="48" y="50" width="9" height="22" rx="3" fill="#B09870"/>
+          <rect x="62" y="48" width="9" height="22" rx="3" fill="#B09870"/>
+          <circle cx="78" cy="18" r="4" fill="#2A1810"/>
+          <ellipse cx="62" cy="10" rx="5" ry="8" fill="#C8B08A"/>
+          <ellipse cx="74" cy="10" rx="5" ry="8" fill="#C8B08A"/>
+        </g>
+        <!-- Milk bottle decoration -->
+        <g transform="translate(260, 250)">
+          <rect x="28" y="20" width="25" height="45" rx="3" fill="rgba(245,237,214,0.15)" stroke="#C8933A" stroke-width="1.5"/>
+          <rect x="32" y="10" width="17" height="14" rx="2" fill="rgba(245,237,214,0.1)" stroke="#C8933A" stroke-width="1"/>
+          <rect x="35" y="5" width="11" height="8" rx="1" fill="#C8933A" opacity="0.6"/>
+          <line x1="28" y1="35" x2="53" y2="35" stroke="#C8933A" stroke-width="1" opacity="0.5"/>
+          <text x="40.5" y="55" text-anchor="middle" font-size="10" fill="#C8933A" opacity="0.8" font-family="serif">SM</text>
+        </g>
+        <!-- Golden light rays from sun -->
+        <line x1="300" y1="120" x2="300" y2="50" stroke="#C8933A" stroke-width="1" opacity="0.3"/>
+        <line x1="355" y1="135" x2="395" y2="90" stroke="#C8933A" stroke-width="1" opacity="0.2"/>
+        <line x1="245" y1="135" x2="205" y2="90" stroke="#C8933A" stroke-width="1" opacity="0.2"/>
+        <line x1="370" y1="175" x2="440" y2="160" stroke="#C8933A" stroke-width="1" opacity="0.2"/>
+        <line x1="230" y1="175" x2="160" y2="160" stroke="#C8933A" stroke-width="1" opacity="0.2"/>
+      </svg>
+    </div>
+  </div>
+
+  <div class="about-text">
+    <p class="section-label">Ons Storie · Our Story</p>
+    <div class="divider"></div>
+    <h2 class="section-title">Waar die Son Skyn,<br>Groei Kwaliteit</h2>
+    <p class="section-body">
+      At Sonskyn Melkery, we believe that great dairy begins with happy, healthy animals and land that is cared for with passion. Our name — <em>Sunshine Dairy</em> — reflects our philosophy: let nature do what it does best, bathed in golden South African sunlight.
+    </p>
+    <p class="section-body">
+      Every bottle of milk and tub of cream that leaves our farm is a testament to doing things the right way. No shortcuts. No compromise. Just pure, fresh, honest dairy — straight from the pasture to your table.
+    </p>
+    <a href="#products" class="btn-primary" style="align-self:flex-start; margin-top:1rem;">Sien Ons Produkte</a>
+  </div>
+</section>
+
+<!-- ── PRODUCTS ── -->
+<section class="products" id="products">
+  <div class="products-header">
+    <p class="section-label">Vars Elke Dag · Fresh Every Day</p>
+    <div class="divider" style="margin: 0 auto;"></div>
+    <h2 class="section-title" style="color: var(--deep-green);">Ons Produkte</h2>
+    <p class="section-body" style="text-align:center;">Farm-fresh dairy at prices that make sense — because quality shouldn't cost the earth.</p>
+  </div>
+  <div class="product-grid">
+    <div class="product-card">
+      <div class="product-icon">🥛</div>
+      <h3 class="product-name">Vars Plaasmelk</h3>
+      <p class="product-desc">Rich, creamy fresh milk straight from our herd. Full-flavoured and naturally wholesome — the way milk is supposed to taste.</p>
+      <div class="product-price">R26 / 2 Liter</div>
+    </div>
+    <div class="product-card">
+      <div class="product-icon">🍶</div>
+      <h3 class="product-name">Vars Dik Room</h3>
+      <p class="product-desc">Thick, luscious cream skimmed fresh daily. Perfect for cooking, baking, or simply dolloping over your favourite dessert.</p>
+      <div class="product-price">R40 / 500ml</div>
+    </div>
+    <div class="product-card">
+      <div class="product-icon">🌿</div>
+      <h3 class="product-name">Seasonal Products</h3>
+      <p class="product-desc">Enquire about our seasonal dairy offerings. We produce small batches when the cows are at their best — worth asking about.</p>
+      <div class="product-price">Ask Us</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── WHY ── -->
+<section class="why" id="why">
+  <div class="why-inner">
+    <div class="why-left">
+      <p class="section-label" style="color: rgba(200,147,58,0.8);">Hoekom Sonskyn</p>
+      <div class="divider" style="margin: 1rem 0;"></div>
+      <h2 class="section-title">Die Verskil is<br>Kwaliteit</h2>
+      <p class="section-body" style="color: rgba(245,237,214,0.6); margin-top: 1.5rem;">
+        Our tagline isn't just words on a sign. It's a promise we keep every single day.
+      </p>
+    </div>
+    <div class="why-points">
+      <div class="why-point">
+        <span class="why-point-num">01</span>
+        <h4 class="why-point-title">Pasture-Raised</h4>
+        <p class="why-point-body">Our cows graze freely on lush green pastures, giving the milk its rich, natural flavour.</p>
+      </div>
+      <div class="why-point">
+        <span class="why-point-num">02</span>
+        <h4 class="why-point-title">Freshly Collected</h4>
+        <p class="why-point-body">Milk collected daily and available the same day — no long shelf lives, just fresh goodness.</p>
+      </div>
+      <div class="why-point">
+        <span class="why-point-num">03</span>
+        <h4 class="why-point-title">Better Prices</h4>
+        <p class="why-point-body">Buy directly from the farm and pay less than supermarket prices without sacrificing quality.</p>
+      </div>
+      <div class="why-point">
+        <span class="why-point-num">04</span>
+        <h4 class="why-point-title">Local & Trusted</h4>
+        <p class="why-point-body">A family farm serving the community. You know where your food comes from — and you're welcome to visit.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── QUOTE ── -->
+<section class="quote-section">
+  <div class="quote-mark">"</div>
+  <p class="quote-text">"Fresh milk at better prices than supermarkets — the cream is thick and absolutely fresh."</p>
+  <p class="quote-attr">— Loren Mohammed, Google Review ★★★★★</p>
+</section>
+
+<!-- ── CONTACT ── -->
+<section class="contact" id="contact">
+  <div class="contact-inner">
+    <div>
+      <p class="section-label">Besoek Ons · Visit Us</p>
+      <div class="divider" style="margin: 1rem 0 2rem;"></div>
+      <h2 class="section-title" style="color: var(--deep-green); margin-bottom: 2.5rem;">Kry in Kontak</h2>
+      <div class="contact-info">
+        <div class="contact-item">
+          <div class="contact-item-icon">📍</div>
+          <div class="contact-item-text">
+            <strong>Adres</strong>
+            <p>Sonskyn Melkery<br>South Africa</p>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-icon">🕐</div>
+          <div class="contact-item-text">
+            <strong>Ure · Hours</strong>
+            <p>Monday – Friday: 7:00 – 17:00<br>Saturday: 7:00 – 13:00<br>Sunday: Closed</p>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-icon">📦</div>
+          <div class="contact-item-text">
+            <strong>Beskikbaarheid</strong>
+            <p>Fresh milk and cream available daily.<br>Call ahead to confirm stock.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <p class="section-label">Stuur 'n Boodskap</p>
+      <div class="divider" style="margin: 1rem 0 2rem;"></div>
+      <div class="contact-form">
+        <div class="form-group">
+          <label>Jou Naam</label>
+          <input type="text" placeholder="Name">
+        </div>
+        <div class="form-group">
+          <label>E-pos / Epos</label>
+          <input type="email" placeholder="you@example.com">
+        </div>
+        <div class="form-group">
+          <label>Boodskap</label>
+          <textarea rows="5" placeholder="Ask us about availability, orders, or just say hello…"></textarea>
+        </div>
+        <button class="btn-primary" style="cursor:pointer; border:none; align-self:flex-start; margin-top:0.5rem;" onclick="alert('Dankie! We will be in touch soon.')">
+          Stuur Boodskap
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div>
+    <div class="footer-logo">Sonskyn Melkery</div>
+    <div class="footer-tagline">Die Verskil is Kwaliteit</div>
+  </div>
+  <p class="footer-copy">© 2025 Sonskyn Melkery · All Rights Reserved</p>
+</footer>
+
+</body>
+</html>
